@@ -9,7 +9,7 @@ st.set_page_config(page_title="Polarization Visualizer", layout="wide")
 
 # Sidebar Layout
 st.sidebar.header(" ")
-logo = Image.open(r"E:\codes\mrslab.png")
+logo = Image.open("mrslab.png")
 st.sidebar.image(logo)
 st.sidebar.markdown("---")
 # User Inputs
