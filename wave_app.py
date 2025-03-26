@@ -1,17 +1,26 @@
 
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 from PIL import Image
+
+# Ensure the 'assets' folder exists and load the logo
+logo_path = os.path.join(os.path.dirname(__file__), "assets", "mrslab.png")
+if os.path.exists(logo_path):
+    logo = Image.open(logo_path)
+else:
+    logo = None  # Prevents app crash if file is missing
 
 # Streamlit Page Config
 st.set_page_config(page_title="Polarization Visualizer", layout="wide")
 
 # Sidebar Layout
 st.sidebar.header(" ")
-logo = Image.open("mrslab.png")
-st.sidebar.image(logo)
+if logo:
+    st.sidebar.image(logo)
 st.sidebar.markdown("---")
+
 # User Inputs
 amplitude_h = st.sidebar.slider("Amplitude (H)", 0.0, 2.0, 1.0)
 amplitude_v = st.sidebar.slider("Amplitude (V)", 0.0, 2.0, 1.0)
@@ -58,7 +67,5 @@ with col2:
     st.metric(label="Ellipticity Angle", value=f"{np.degrees(ellipticity):.2f}°")
     st.metric(label="Orientation Angle", value=f"{np.degrees(orientation):.2f}°")
 
-# Sidebar Footer with Logo
+# Sidebar Footer
 st.sidebar.markdown("---")
-
-st.sidebar.markdown("App Credit: Ashmitha Nihar, IIT Bombay")
