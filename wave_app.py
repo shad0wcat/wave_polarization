@@ -69,4 +69,3 @@ with col2:
 
 # Sidebar Footer
 st.sidebar.markdown("---")
-st.sidebar.markdown("App credit: Ashmitha Nihar, IIT Bombay")
