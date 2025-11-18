@@ -25,8 +25,8 @@ st.sidebar.image(logo, use_column_width=True)
 st.sidebar.markdown("---")
 
 # User Inputs
-ellipticity_deg = st.slider("Ellipticity Angle (°)", -45, 45, 0, step=1)
-orientation_deg = st.slider("Orientation Angle (°)", 0, 180, 45, step=1)
+ellipticity_deg = st.sidebar.slider("Ellipticity Angle (°)", -45, 45, 0, step=1)
+orientation_deg = st.sidebar.slider("Orientation Angle (°)", 0, 180, 45, step=1)
 
 
 st.sidebar.markdown("---")
@@ -176,6 +176,7 @@ fig.update_layout(
         zaxis=dict(backgroundcolor='rgba(0,0,0,0)')
     )
 )
+
 
 
 
