@@ -116,7 +116,7 @@ wave = go.Scatter3d(
     z=z,
     mode='lines',
     line=dict(color='rgb(191, 0, 0)', width=7),  # maroon in RGB
-    name='Circular Wave'
+    name='Resultant Wave'
 )
 #
 # --- Projection on XZ wall (X component), y = -1.5
@@ -176,6 +176,7 @@ fig.update_layout(
         zaxis=dict(backgroundcolor='rgba(0,0,0,0)')
     )
 )
+
 
 
 
