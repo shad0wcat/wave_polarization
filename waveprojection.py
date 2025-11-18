@@ -1,8 +1,7 @@
 import streamlit as st
 import numpy as np
 import plotly.graph_objs as go
-from PIL import Image
-import io
+
 
 # ----------------------------------------------------------
 # PAGE CONFIG
@@ -163,5 +162,6 @@ with col2:
     st.metric("Ellipticity Angle", f"{ellipticity_deg}°")
     st.metric("Orientation Angle", f"{orientation_deg}°")
     st.metric("Phase Difference (δ)", f"{np.degrees(delta):.2f}°")
+
 
 
