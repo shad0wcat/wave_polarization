@@ -165,14 +165,3 @@ with col2:
     st.metric("Phase Difference (δ)", f"{np.degrees(delta):.2f}°")
 
 
-# ----------------------------------------------------------
-# DOWNLOAD BUTTON
-# ----------------------------------------------------------
-buffer = io.BytesIO()
-fig.write_image(buffer, format="png")
-st.download_button(
-    "Download as PNG",
-    buffer.getvalue(),
-    file_name="polarization_wave.png",
-    mime="image/png"
-)
