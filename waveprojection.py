@@ -13,8 +13,13 @@ st.set_page_config(page_title="3D Polarization Wave", layout="wide")
 # ----------------------------------------------------------
 st.sidebar.header(" ")
 
-# Load your logo
-logo = Image.open(r"E:\codes\mrslab.png")   # <--- replace if needed
+# Load  logo
+logo_path = os.path.join(os.path.dirname(__file__), "assets", "mrslab.png")
+if os.path.exists(logo_path):
+    logo = Image.open(logo_path)
+else:
+    logo = None  # Prevents app crash if file is missing
+
 st.sidebar.image(logo, use_column_width=True)
 st.sidebar.markdown("---")
 
@@ -162,6 +167,7 @@ with col2:
     st.metric("Ellipticity Angle", f"{ellipticity_deg}°")
     st.metric("Orientation Angle", f"{orientation_deg}°")
     st.metric("Phase Difference (δ)", f"{np.degrees(delta):.2f}°")
+
 
 
 
