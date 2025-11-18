@@ -119,7 +119,7 @@ proj_xz = go.Scatter3d(
     y=np.full_like(z, (wall_offset)),  # push to back wall
     z=z,
     mode='lines',
-    line=dict(color='red', width=2),
+    line=dict(color='blue', width=2),
     name='X Component'
 )
 
@@ -164,6 +164,7 @@ fig.update_layout(
         zaxis=dict(backgroundcolor='rgba(0,0,0,0)')
     )
 )
+
 
 
 
