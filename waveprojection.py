@@ -157,7 +157,7 @@ fig.update_layout(
 # ----------------------------------------------------------
 # MAIN LAYOUT (TWO COLUMNS LIKE FIRST APP)
 # ----------------------------------------------------------
-col1, col2 = st.columns([4, 3])
+col1, col2 = st.columns([3, 3])
 
 with col1:
     st.plotly_chart(fig, use_container_width=True)
@@ -167,6 +167,7 @@ with col2:
     st.metric("Ellipticity Angle", f"{ellipticity_deg}°")
     st.metric("Orientation Angle", f"{orientation_deg}°")
     st.metric("Phase Difference (δ)", f"{np.degrees(delta):.2f}°")
+
 
 
 
