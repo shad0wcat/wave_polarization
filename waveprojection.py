@@ -32,27 +32,6 @@ orientation_deg = st.sidebar.slider("Orientation Angle (°)", 0, 180, 45, step=1
 st.sidebar.markdown("---")
 
 
-def compute_eye(azimuth_deg, elevation_deg, radius):
-    az = np.radians(azimuth_deg)
-    el = np.radians(elevation_deg)
-    x = radius * np.cos(el) * np.cos(az)
-    y = radius * np.cos(el) * np.sin(az)
-    z = radius * np.sin(el)
-    return dict(x=x, y=y, z=z)
-# az = st.slider("Azimuth", 0, 360, 45)
-# el = st.slider("Elevation", -90, 90, 30)
-# r = st.slider("Distance", 1.0, 5.0, 2.0)
-
-az = 165
-el = 30
-r = 2.75
-
-camera = dict(
-    eye=compute_eye(az, el, r),
-    up=dict(x=0, y=1, z=0)
-)
-
-
 # --- Wave parameters ---
 num_cycles = 7
 wavelength = 1.5
@@ -60,13 +39,9 @@ L = num_cycles * wavelength  # Total wave length
 z = np.linspace(0, L, 1000)
 num_points = 1000
 z = np.linspace(0, L, num_points)
-# --- Sliders for orientation and ellipticity ---
-# ellipticity_deg = st.slider("Ellipticity Angle (°)", -45, 45, 0, step=1)
-# orientation_deg = st.slider("Orientation Angle (°)", 0, 180, 45, step=1)
 
 # --- Derived parameters ---
 orientation_rad = np.radians(orientation_deg)
-#delta = 2 * np.radians(ellipticity_deg)  # Left/right handedness
 
 epsilon = 1e-6
 delta = np.arctan( np.tan(2 * np.radians(ellipticity_deg)) / (np.sin(2 * np.radians(orientation_deg)) + epsilon) )
@@ -139,12 +114,6 @@ proj_yz = go.Scatter3d(
     name='Y Component'
 )
 
-# --- Camera: view from front-right
-# camera = dict(
-#     eye=camera_eye(angle_y_deg=30, angle_z_deg=45),
-#     up=dict(x=0, y=1, z=0),
-#     center=dict(x=0, y=0, z=0)
-# )
 layout = go.Layout(
     scene=dict(
         xaxis=dict(showgrid=True,  zeroline=True,showticklabels=True, range=[-2.6, 2.6]),
@@ -176,6 +145,7 @@ fig.update_layout(
         zaxis=dict(backgroundcolor='rgba(0,0,0,0)')
     )
 )
+
 
 
 
