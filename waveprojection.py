@@ -25,8 +25,8 @@ st.sidebar.image(logo, use_column_width=True)
 st.sidebar.markdown("---")
 
 # User Inputs
-ellipticity_deg = st.sidebar.slider("Ellipticity Angle (°)", -45, 45, 0, step=1)
 orientation_deg = st.sidebar.slider("Orientation Angle (°)", 0, 180, 45, step=1)
+phase_deg = st.sidebar.slider("Phase Difference δ (°)", -180, 180, 0, step=1)
 
 st.sidebar.markdown("---")
 
@@ -58,16 +58,9 @@ L = num_cycles * wavelength
 z = np.linspace(0, L, 1000)
 
 orientation_rad = np.radians(orientation_deg)
+delta = np.radians(phase_deg)     # <<--- DIRECT PHASE DIFFERENCE INPUT
 
-# ----------------------------------------------------------
-# FIXED δ FORMULA — this makes ellipticity work properly
-# ----------------------------------------------------------
-delta = np.arctan2(
-    np.tan(2 * np.radians(ellipticity_deg)),
-    np.sin(2 * np.radians(orientation_deg))
-)
-
-# Field amplitudes in rotated basis
+# Field components
 Ax = np.cos(orientation_rad)
 Ay = np.sin(orientation_rad)
 
@@ -81,7 +74,7 @@ Ey = Ay * np.cos(omega * z + delta)
 # ----------------------------------------------------------
 wall_offset = -2.5
 
-# YZ Wall (floor)
+# YZ Wall
 y_vals = np.linspace(-1.5, 1.5, 2)
 z_vals = np.linspace(0, L, 2)
 floor = go.Surface(
@@ -93,7 +86,7 @@ floor = go.Surface(
     opacity=0.5
 )
 
-# XZ Wall (back wall)
+# XZ Wall
 x_vals = np.linspace(-1.5, 1.5, 2)
 back_wall = go.Surface(
     x=np.outer(x_vals, np.ones_like(z_vals)),
@@ -104,34 +97,31 @@ back_wall = go.Surface(
     opacity=0.5
 )
 
-# Main 3D wave
+# Main wave
 wave = go.Scatter3d(
     x=Ex,
     y=Ey,
     z=z,
     mode='lines',
     line=dict(color='rgb(191, 0, 0)', width=7),
-    name='Wave'
 )
 
-# Projection on XZ wall
+# Projection on XZ
 proj_xz = go.Scatter3d(
     x=Ex,
     y=np.full_like(z, wall_offset),
     z=z,
     mode='lines',
-    line=dict(color='red', width=3),
-    name='X Projection'
+    line=dict(color='red', width=3)
 )
 
-# Projection on YZ wall
+# Projection on YZ
 proj_yz = go.Scatter3d(
     x=np.full_like(z, -wall_offset),
     y=Ey,
     z=z,
     mode='lines',
-    line=dict(color='green', width=3),
-    name='Y Projection'
+    line=dict(color='green', width=3)
 )
 
 layout = go.Layout(
@@ -160,7 +150,7 @@ fig.update_layout(
 
 
 # ----------------------------------------------------------
-# MAIN LAYOUT (COLUMNS)
+# MAIN LAYOUT
 # ----------------------------------------------------------
 col1, col2 = st.columns([4, 3])
 
@@ -169,9 +159,9 @@ with col1:
 
 with col2:
     st.markdown("### Wave Parameters")
-    st.metric("Ellipticity Angle", f"{ellipticity_deg}°")
     st.metric("Orientation Angle", f"{orientation_deg}°")
-    st.metric("Phase Difference (δ)", f"{np.degrees(delta):.2f}°")
+    st.metric("Phase Difference δ", f"{phase_deg}°")
+
 
 
 
