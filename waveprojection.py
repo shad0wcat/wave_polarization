@@ -61,8 +61,8 @@ z = np.linspace(0, L, 1000)
 num_points = 1000
 z = np.linspace(0, L, num_points)
 # --- Sliders for orientation and ellipticity ---
-ellipticity_deg = st.slider("Ellipticity Angle (°)", -45, 45, 0, step=1)
-orientation_deg = st.slider("Orientation Angle (°)", 0, 180, 45, step=1)
+# ellipticity_deg = st.slider("Ellipticity Angle (°)", -45, 45, 0, step=1)
+# orientation_deg = st.slider("Orientation Angle (°)", 0, 180, 45, step=1)
 
 # --- Derived parameters ---
 orientation_rad = np.radians(orientation_deg)
@@ -176,6 +176,7 @@ fig.update_layout(
         zaxis=dict(backgroundcolor='rgba(0,0,0,0)')
     )
 )
+
 
 
 
